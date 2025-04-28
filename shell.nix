@@ -8,5 +8,7 @@ in pkgs.mkShell {
       ps.uvicorn
       ps.sqlmodel
     ]))
+    pkgs.pnpm
+    pkgs.nodejs_22
   ];
 }
