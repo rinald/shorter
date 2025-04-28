@@ -16,6 +16,28 @@
     pointer-events: none;
 }
 
+.shortUrl {
+    margin: auto;
+    padding: 16px;
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 500px;
+    border-radius: 10px;
+    background-color: #2e2e2e;
+
+    li {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    a {
+        text-decoration: none;
+        color: aquamarine;
+    }
+}
+
 .input {
     box-sizing: border-box;
     width: 100%;

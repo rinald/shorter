@@ -10,7 +10,7 @@ type Props = {
 
 const ShortUrl = ({ hash, long_url }: Props) => {
   return (
-    <ul>
+    <ul className={styles.shortUrl}>
       <li>
         Short url:{" "}
         <a
