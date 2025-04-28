@@ -6,6 +6,7 @@ in pkgs.mkShell {
     (pkgs.python3.withPackages (ps: [
       ps.fastapi
       ps.uvicorn
+      ps.sqlmodel
     ]))
   ];
 }

@@ -7,7 +7,7 @@
     "pyright": {
       "settings": {
         "python": {
-          "pythonPath": "/nix/store/ib4gjl9az4zmwfsf0p6vwbly3jl0n28k-python3-3.11.10-env/bin/python"
+          "pythonPath": "/nix/store/7smdx7sn5gz4rv903j3ps0k10pcsj00z-python3-3.11.10-env/bin/python"
         }
       }
     }
