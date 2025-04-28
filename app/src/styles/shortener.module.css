@@ -11,6 +11,11 @@
     background-color: #2e2e2e;
 }
 
+.urlShortener[aria-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 .input {
     box-sizing: border-box;
     width: 100%;

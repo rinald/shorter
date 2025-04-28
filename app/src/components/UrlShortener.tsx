@@ -1,18 +1,49 @@
-import { useRef } from "react";
-import styles from "../styles/shortener.module.css";
+import { useRef, useTransition, useState } from "react";
 
+import styles from "../styles/shortener.module.css";
 import { createShortUrl } from "../util/api";
+
+type Props = {
+  hash: string;
+  long_url: string;
+};
+
+const ShortUrl = ({ hash, long_url }: Props) => {
+  return (
+    <ul>
+      <li>
+        Short url:{" "}
+        <a
+          href={`http://localhost:8000/url/${hash}`}
+        >{`http://localhost:8000/${hash}`}</a>
+      </li>
+      <li>
+        Long url: <a href={long_url}>{long_url}</a>
+      </li>
+    </ul>
+  );
+};
 
 const UrlShortener = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [isPending, startTransition] = useTransition();
+  const [shortUrl, setShortUrl] = useState<any>(null);
 
-  return (
+  return !shortUrl ? (
     <form
       className={styles.urlShortener}
       onSubmit={(e) => {
         e.preventDefault();
-        createShortUrl(inputRef.current!.value);
+        startTransition(async () => {
+          try {
+            const data = await createShortUrl(inputRef.current!.value);
+            setShortUrl(data);
+          } catch (error) {
+            console.error(error);
+          }
+        });
       }}
+      aria-disabled={isPending}
     >
       <input
         type="url"
@@ -26,6 +57,8 @@ const UrlShortener = () => {
         Shorten URL
       </button>
     </form>
+  ) : (
+    <ShortUrl hash={shortUrl.hash} long_url={shortUrl.long_url} />
   );
 };
 
