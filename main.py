@@ -1,31 +1,10 @@
-from typing import Annotated
-from datetime import datetime, timedelta
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from sqlmodel import Field, Session, SQLModel, create_engine, select
+from sqlmodel import select
 
 from encode import base62_encode
-
-class ShortUrl(SQLModel, table=True):
-    hash: str = Field(primary_key=True)
-    long_url: str = Field()
-    created_date: str = Field(default_factory=lambda: datetime.now().isoformat())
-    expiration_date: datetime = Field(default_factory=lambda: datetime.now() + timedelta(days=7))
-
-sqlite_file_name = "database.db"
-sqlite_url = f"sqlite:///{sqlite_file_name}"
-
-connect_args = {"check_same_thread": False}
-engine = create_engine(sqlite_url, connect_args=connect_args)
-
-def create_db_and_tables():
-    SQLModel.metadata.create_all(engine)
-
-def get_session():
-    with Session(engine) as session:
-        yield session
-
-SessionDep = Annotated[Session, Depends(get_session)]
+from models import ShortUrl
+from database import SessionDep, create_db_and_tables
 
 app = FastAPI()
 

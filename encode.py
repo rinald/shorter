@@ -3,11 +3,11 @@ from hashlib import sha256
 
 '''Encode a URL using base62 encoding.'''
 def base62_encode(url: str) -> str:
-    # Generate a unique hash for the URL
+    # generate a unique hash for the URL
     hash = sha256(url.encode() + urandom(16)).hexdigest()
     hash2 = int(hash[:12], 16)
 
-    # Convert the hash to base62
+    # convert the hash to base62
     base62_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
     base62 = ''
     while hash2:
