@@ -3,12 +3,13 @@ let
   pkgs = import nixpkgs { config = {}; overlays = []; };
 in pkgs.mkShell {
   packages = [
-    (pkgs.python3.withPackages (ps: [
-      ps.fastapi
-      ps.uvicorn
-      ps.sqlmodel
-    ]))
+    pkgs.python3
     pkgs.pnpm
     pkgs.nodejs_22
   ];
+
+  # activate venv
+  shellHook = ''
+    source .venv/bin/activate
+  '';
 }

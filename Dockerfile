@@ -9,8 +9,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Create data directory for persistent storage
 RUN mkdir -p /app/data
 
-# Copy application code
-COPY . .
+# Copy python files
+COPY *.py .
 
 # Set database path to the mounted volume
 ENV DATABASE_URL=sqlite:///./data/shorter.db

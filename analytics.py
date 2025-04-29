@@ -12,7 +12,7 @@ def create_analytics_record(url: ShortUrl, session: SessionDep, request: Request
     record = Analytics(
         short_url=url.hash,
         ip_address=request.client.host if request.client is not None else None,
-        user_agent=request.headers.get('User-Agent')
+        user_agent=request.headers.get("User-Agent"),
     )
 
     session.add(record)
