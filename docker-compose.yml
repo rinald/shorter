@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./shorter.db
+    restart: unless-stopped
+    volumes:
+      - db_data:/app/data
+
+  frontend:
+    build:
+      context: ./app
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    environment:
+      - BACKEND_URL=http://backend:8000
+
+volumes:
+  db_data:
